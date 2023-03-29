@@ -1,0 +1,33 @@
+---
+- name: Configure a host using DSC
+  hosts: all
+
+  tasks:
+    - name: Create a new directory
+      win_dsc:
+        resource_name: File
+        DestinationPath: C:\romlab\dsc-usage-example
+        Ensure: Present
+        Type: Directory
+
+    - name: Create a new file with text
+      win_dsc:
+        resource_name: File
+        DestinationPath: C:\romlab\dsc-usage-example\new-file.txt
+        Contents:
+          Hi
+          Testing if file gets created with contents inside
+        Ensure: Present
+        Type: File
+
+    - name: Copy a zip file to the host
+      win_copy:
+        src: romlab-zip.zip
+        dest: C:\romlab\dsc-usage-example\romlab-zip.zip
+
+    - name: Extract a zip file in the new directory
+      win_dsc:
+        resource_name: Archive
+        Destination: C:\romlab\dsc-usage-example\extracted-zip
+        Path: C:\romlab\dsc-usage-example\romlab-zip.zip
+        Ensure: Present

@@ -1,0 +1,8 @@
+# Defines the root directory of the IIS site
+iis_site_path:  C:\sites\variables
+
+# Defines the IIS site name
+iis_site_name: "RomLab-variables"
+
+# Defines the port of the IIS site
+iis_site_port: 8080

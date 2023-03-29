@@ -1,0 +1,17 @@
+Steps to install Ansible on Windows (via Ubuntu shell):
+By default the main repository does not have the latest/stable Ansible version so installing an additional repository is advised
+1) apt-get install software-properties-common -y
+2) apt-add-repository ppa:ansible/ansible
+
+Now you can install Ansible using apt-get
+3) apt-get install ansible -y
+
+ansible --version  confirms Ansible is installed
+
+Specific to Windows/WSL
+sudo apt-get update
+sudo apt-get install python3-pip
+sudo pip3 install ansible
+ansible --version
+sudo pip3 install pywinrm
+sudo pip3 install pywinrm[credssp]

@@ -1,0 +1,19 @@
+---
+- name: Testing Ansible Operaators w/ conditionals
+  hosts: server1
+  vars:
+    my_service: Web-Server
+    supported_os:
+     - "Microsoft Windows Server 2016 Datacenter"
+     - "Microsoft Windows Server 2016 Core"
+     - "Microsoft Windows Server 2016 Datacenter"
+     - "Microsoft Windows Server 2012 Core"
+  tasks:
+   - name: Install "{{ my_service }}"
+     win_service:
+       name: "{{ my_service }}"
+       state: present
+       include_sub_features: yes
+       include_management_tools: yes
+     when: ansible_facts['distributed'] in
+      supported_os

@@ -1,0 +1,12 @@
+---
+- name:  Service installation check
+  hosts: server1
+  tasks:
+    - name: Install "{{ my_service }}"
+      win_feature:
+        name: "{{ my_service }}"
+        state: present
+        include_sub_features: yes
+        include_management_tools: yes
+      when: my_service is defined
+      

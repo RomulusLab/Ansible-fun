@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Ansible-fun",
+			"path": "../Git/Ansible-fun"
+		},
+		{
+			"name": "Ansible-fun-1",
+			"path": "../Git/Ansible-fun-1"
+		}
+	],
+	"settings": {}
+}

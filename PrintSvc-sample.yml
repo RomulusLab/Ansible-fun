@@ -1,0 +1,9 @@
+---
+- name: Print server services
+  hosts: server1.romuluslab.internal
+  tasks:
+    - name: Make sure the Print Spooler service has started
+      win_service:
+        name: spooler
+        state: started
+      

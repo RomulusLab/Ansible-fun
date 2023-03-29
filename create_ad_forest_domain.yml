@@ -1,0 +1,17 @@
+---
+- name:  Create an AD forest/domain
+  win_domain:
+    create_dns_delegation: yes
+    database_path: C:\Windows\NTDS
+    dns_domain_name: RomLab.priv
+    domain_mode: Win2012R2
+    domain_netbios_name: ROMLABPRIV
+    forest_mode: Win2012R2
+    safe_mode_password: plain_text_password
+    sysvol_path: C:\Windows\SYSVOL
+  register: domain_create
+
+- name:  Reboot if necessary
+  win_reboot:
+    msg: "Rebooting for new forest or domain creation"
+  when: domain_create['reboot_required']

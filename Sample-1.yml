@@ -1,0 +1,20 @@
+- name: Sample tasks for making sure settings are in place
+  hosts: server2.romuluslab.internal
+
+  tasks:
+  - name: Ensure that WinRM is started when the system has settled
+    win_service:
+      name: WinRM
+      start_mode: delayed
+
+  - name: Registry path MyClassroom and its entries are absent
+    win_regedit:
+      path: HKCU:\Software\MyClassroom
+      state: absent
+      delete_key: yes
+      
+  - name: Region format is set to English (United States)
+    win_region:
+      format: en-US
+  
+  

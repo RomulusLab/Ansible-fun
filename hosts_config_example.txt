@@ -1,0 +1,9 @@
+[web]
+server1
+
+[web:vars]
+ansible_user=svc-ansible@romuluslab.internal
+ansible_password=
+ansible_connection=winrm
+ansible_winrm_transport=credssp
+ansible_winrm_server_cert_validation=ignore
