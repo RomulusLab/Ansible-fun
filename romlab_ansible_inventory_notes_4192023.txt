@@ -1,0 +1,42 @@
+romlab_azure_rm.yml
+--------------------------------------------------------------
+plugin: azure_rm
+include_vm_resource_groups:
+ - romlab-rg-593
+auth_source: auto
+
+plain_host_names: yes
+
+conditional_groups:
+  windows: "'WindowsServer' or 'WindowsDesktop' in image.offer"
+keyed_groups:
+ - key: tags.applicationRole
+--------------------------------------------------------------
+ansible-inventory -i romlab_azure_rm.yml --graph
+@all:
+  |--@ungrouped:
+  |--@windows:
+  |  |--romlab-server0
+  |  |--romlab-server1
+  |  |--romlab-ws0
+  |--@_domain_controller:
+  |  |--romlab-server0
+  |  |--romlab-server1
+  |--@_client_desktop:
+  |  |--romlab-ws0
+  
+  
+az vm update \
+--resource-group romlab-rg-593 \
+--name romlab-server0 \
+--set tags.applicationRole='domain-controller'
+
+az vm update \
+--resource-group romlab-rg-593 \
+--name romlab-server1 \
+--set tags.applicationRole='domain-controller'
+
+az vm update \
+--resource-group romlab-rg-593 \
+--name romlab-ws0 \
+--set tags.applicationRole='client-desktop'

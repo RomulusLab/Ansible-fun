@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Create Ansible resource group(test)
+      azure_rm_resourcegroup:
+        name: romlab-rg-ansible
+        location: eastus
+      register: rg
+    - debug:
+        var: rg

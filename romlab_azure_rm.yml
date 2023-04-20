@@ -1,0 +1,11 @@
+plugin: azure_rm
+include_vm_resource_groups:
+ - romlab-rg-593
+auth_source: auto
+
+plain_host_names: yes
+
+conditional_groups:
+  windows: "'WindowsServer' or 'WindowsDesktop' in image.offer"  
+keyed_groups:
+ - key: tags.applicationRole

@@ -1,0 +1,34 @@
+Create new Azure Service Principal
+$sp = New-AzADServicePrincipal -DisplayName romlab-sp-ansbl
+
+Get credentials for Service Principal created
+$sp.PasswordCredentials.SecretText:
+7s48Q~s5zsb2xasT~fFrlt-PIU_boHglWk6vbcBA
+
+$subId = (Get-AzSubscription -SubscriptionName 'Azure subscription 1').id
+
+$roleAssignmentSplat = @{
+    ObjectId = $sp.appid
+    RoleDefinitionName = 'Contributor'
+    Scope = "/subscriptions/$subId"
+}
+
+New-AzRoleAssignment @roleAssignmentSplat
+
+@{
+    subscriptionId = (Get-AzContext).Subscription.Id
+    clientid = (Get-AzADServicePrincipal -DisplayName 'romlab-sp-ansbl').AppId
+    tenantid = (Get-AzContext).Tenant.Id
+}
+
+Name                           Value
+----                           -----
+clientid                       1ed6774b-8f8f-41bd-b34b-7683c1d6d6ff
+tenantid                       581bb88b-16a4-4c5e-a60a-64991f58384c
+subscriptionId                 ad80d0e4-e8e9-41c7-aedd-bb26a094c58a
+
+[default]
+subscription_id=ad80d0e4-e8e9-41c7-aedd-bb26a094c58a
+client_id=1ed6774b-8f8f-41bd-b34b-7683c1d6d6ff
+secret=7s48Q~s5zsb2xasT~fFrlt-PIU_boHglWk6vbcBA
+tenant=581bb88b-16a4-4c5e-a60a-64991f58384c

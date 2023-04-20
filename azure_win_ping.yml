@@ -1,0 +1,54 @@
+---
+- hosts: romlab-server0
+  gather_facts: false
+
+  vars_prompt:
+    - name: password_srv0
+      prompt: "Enter password srv0"
+
+  vars:
+    ansible_user: roms
+    ansible_password: "{{ password_srv0 }}"
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: run win_ping
+      win_ping:
+
+- hosts: romlab-server1
+  gather_facts: false
+
+  vars_prompt:
+    - name: password_srv1
+      prompt: "Enter password srv1"
+
+  vars:
+    ansible_user: roms
+    ansible_password: "{{ password_srv1 }}"
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: run win_ping
+      win_ping:
+
+- hosts: romlab-ws0
+  gather_facts: false
+
+  vars_prompt:
+    - name: password_ws0
+      prompt: "Enter password ws0"
+
+  vars:
+    ansible_user: roms
+    ansible_password: "{{ password_ws0 }}"
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: run win_ping
+      win_ping:
